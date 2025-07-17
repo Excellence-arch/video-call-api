@@ -55,14 +55,22 @@ app.use(
   })
 );
 
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: [
+      process.env.FRONTEND_URL,
+      'http://localhost:3000',
+      'http://192.168.0.198:3000',
+      'https://234c236fbb5f.ngrok-free.app'
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
+
+// app.use(cors());
 
 // Rate limiting
 const limiter = rateLimit({
@@ -77,8 +85,8 @@ const authLimiter = rateLimit({
   message: 'Too many authentication attempts, please try again later.',
 });
 
-app.use(limiter);
-app.use('/api/auth', authLimiter);
+// app.use(limiter);
+// app.use('/api/auth', authLimiter);
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
@@ -130,7 +138,7 @@ handleSocketConnection(io);
 
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
 
