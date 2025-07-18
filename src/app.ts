@@ -62,7 +62,7 @@ app.use(
       process.env.FRONTEND_URL,
       'http://localhost:3000',
       'http://192.168.0.198:3000',
-      'https://234c236fbb5f.ngrok-free.app'
+      'https://videocall.loca.lt'
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
